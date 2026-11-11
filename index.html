@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>AJota · Convite</title>
+<meta name="description" content="Você foi chamado para o AJota: tela e câmera com a sua turma.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@700;800&family=Onest:wght@400;600&family=Martian+Mono:wght@400&display=swap">
+<style>
+:root{--bg:#F3F2EF;--surface:#FFFFFF;--ink:#1E1F21;--muted:#6B6A66;--dot:#CCCAC4;--shadow:#1E1F21;--giz:#DDD8CE;--ardosia:#5E6E80;--mark-j:#5E6E80;color-scheme:light}
+@media (prefers-color-scheme: dark){:root{--bg:#141414;--surface:#1D1D1E;--ink:#ECEBE8;--muted:#A19F9A;--dot:#2A2A2B;--shadow:#000;--mark-j:#A9B6C4;color-scheme:dark}}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px 16px;background-color:var(--bg);background-image:radial-gradient(var(--dot) 1.2px,transparent 1.4px);background-size:22px 22px;color:var(--ink);font-family:"Onest","Segoe UI",system-ui,sans-serif;font-size:16px;line-height:1.5}
+.card{width:min(480px,100%);background:var(--surface);border:2px solid var(--ink);border-radius:18px;box-shadow:5px 5px 0 var(--shadow);padding:28px;display:flex;flex-direction:column;gap:16px}
+.brand{display:flex;align-items:center;gap:12px}
+.wordmark{font-family:"Unbounded","Arial Black",sans-serif;font-weight:800;font-size:40px;letter-spacing:-.04em;line-height:.95}
+.wordmark .j{color:var(--mark-j)}
+h1{font-family:"Unbounded","Arial Black",sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em;margin:0;line-height:1.15}
+p{margin:0}
+.muted{color:var(--muted)}
+.label{font-family:"Martian Mono",Consolas,monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.room{display:inline-block;font-family:"Martian Mono",Consolas,monospace;font-size:13px;border:2px solid var(--ink);border-radius:999px;padding:3px 12px;background:var(--bg)}
+.btn{display:block;text-align:center;text-decoration:none;font-weight:600;font-size:16px;border:2px solid #1E1F21;border-radius:12px;padding:12px 18px;box-shadow:3px 3px 0 var(--shadow);cursor:pointer;font-family:inherit}
+.btn:active{transform:translate(2px,2px);box-shadow:1px 1px 0 var(--shadow)}
+.primary{background:var(--ardosia);color:#fff}
+.plain{background:var(--surface);color:var(--ink);border-color:var(--ink)}
+.steps{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+details{border-top:2px dashed var(--dot);padding-top:12px}
+summary{cursor:pointer;font-weight:600}
+code{display:block;margin-top:8px;font-family:"Martian Mono",Consolas,monospace;font-size:12px;word-break:break-all;background:var(--bg);border:2px solid var(--ink);border-radius:10px;padding:8px 10px}
+.toast{font-family:"Martian Mono",Consolas,monospace;font-size:12px;color:var(--muted);min-height:1em}
+</style>
+</head>
+<body>
+<main class="card">
+  <div class="brand">
+    <svg width="52" height="52" viewBox="0 0 64 64" aria-hidden="true">
+      <path d="M45 6 V38 a14 14 0 0 1 -28 2" fill="none" stroke="var(--mark-j)" stroke-width="10" stroke-linecap="round"/>
+      <path d="M8 4 L8 36 L16 29 L21.5 41 L28 38.2 L22.7 26.5 L33 26.5 Z" fill="#DDD8CE" stroke="#1E1F21" stroke-width="3.2" stroke-linejoin="round"/>
+    </svg>
+    <span class="wordmark">A<span class="j">J</span>ota</span>
+  </div>
+
+  <section id="invite" hidden>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <h1>Chamaram você para ver a tela junto</h1>
+      <p id="room-line" hidden>Sala: <span class="room" id="room-name"></span></p>
+      <a class="btn primary" id="open" href="#">Abrir no AJota</a>
+      <a class="btn plain" href="https://github.com/DuarteJJ/AJota-releases/releases/latest">Ainda não tenho: baixar o AJota</a>
+      <ol class="steps muted">
+        <li>Sem o AJota? Baixe, instale e volte aqui para clicar em <b>Abrir no AJota</b>.</li>
+        <li>O navegador vai perguntar se pode abrir o app. Pode deixar.</li>
+      </ol>
+      <details>
+        <summary>O app não abriu?</summary>
+        <p class="muted" style="margin-top:8px">Copie o código abaixo e cole no AJota, no campo <b>Link de convite</b>.</p>
+        <code id="code"></code>
+        <button class="btn plain" id="copy" style="margin-top:10px;width:100%">Copiar código</button>
+        <p class="toast" id="toast"></p>
+      </details>
+    </div>
+  </section>
+
+  <section id="plain" hidden>
+    <div style="display:flex;flex-direction:column;gap:16px">
+      <h1>Tela e câmera com a sua turma</h1>
+      <p class="muted">A voz continua no Discord. O áudio do Discord nunca vai junto com a tela.</p>
+      <a class="btn primary" href="https://github.com/DuarteJJ/AJota-releases/releases/latest">Baixar o AJota para Windows</a>
+      <p class="label">Windows 10 (2004) ou mais novo</p>
+    </div>
+  </section>
+</main>
+<script>
+(function () {
+  // O código vem depois do "#": ele fica só no seu navegador e não é enviado para o servidor desta página.
+  var code = decodeURIComponent(location.hash.slice(1))
+  if (!/^[^.\/]+\.[^.\/]+\.[^.\/]+(\/.+)?$/.test(code)) {
+    document.getElementById('plain').hidden = false
+    return
+  }
+  document.getElementById('invite').hidden = false
+  var appUrl = 'ajota://convite/' + code
+  document.getElementById('open').href = appUrl
+  document.getElementById('code').textContent = location.href
+  var room = code.split('/')[1]
+  if (room) {
+    document.getElementById('room-line').hidden = false
+    document.getElementById('room-name').textContent = decodeURIComponent(room)
+  }
+  document.getElementById('copy').addEventListener('click', function () {
+    navigator.clipboard.writeText(location.href).then(
+      function () { document.getElementById('toast').textContent = 'Copiado. Agora cole no AJota.' },
+      function () { document.getElementById('toast').textContent = 'Selecione o código e use Ctrl+C.' }
+    )
+  })
+  // tenta abrir o app sozinho
+  setTimeout(function () { location.href = appUrl }, 600)
+})()
+</script>
+</body>
+</html>
