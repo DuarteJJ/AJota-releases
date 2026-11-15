@@ -56,7 +56,7 @@ code{display:block;margin-top:8px;font-family:"Martian Mono",Consolas,monospace;
       <h1>Chamaram você para ver a tela junto</h1>
       <p id="room-line" hidden>Sala: <span class="room" id="room-name"></span></p>
       <a class="btn primary" id="open" href="#">Abrir no AJota</a>
-      <a class="btn plain" href="https://github.com/DuarteJJ/AJota-releases/releases/latest">Ainda não tenho: baixar o AJota</a>
+      <a class="btn plain" href="baixar/">Ainda não tenho: baixar o AJota</a>
       <ol class="steps muted">
         <li>Sem o AJota? Baixe e instale: ele já abre direto nas salas da turma. Para cair nesta sala, volte aqui e clique em <b>Abrir no AJota</b>.</li>
         <li>O navegador vai perguntar se pode abrir o app. Pode deixar.</li>
@@ -85,7 +85,8 @@ code{display:block;margin-top:8px;font-family:"Martian Mono",Consolas,monospace;
   // O código vem depois do "#": ele fica só no seu navegador e não é enviado para o servidor desta página.
   var code = decodeURIComponent(location.hash.slice(1))
   if (!/^[^.\/]+\.[^.\/]+\.[^.\/]+(\/.+)?$/.test(code)) {
-    document.getElementById('plain').hidden = false
+    // sem convite: vai para a página de download
+    location.replace('baixar/')
     return
   }
   document.getElementById('invite').hidden = false
